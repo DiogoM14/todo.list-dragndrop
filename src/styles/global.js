@@ -12,13 +12,6 @@ export const GlobalStyles = createGlobalStyle`
 
     --background: #121214;
     --gray: #202024;
-    --gray-700: #323238;
-    --gray-800: #29292e;
-    --gray-850: #1f2729;
-    --gray-900: #121214;
-
-    --cyan-500: #61dafb;
-    --yellow-500: #eba417;
   }
 
   @media (max-width: 1080px) {

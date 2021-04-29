@@ -1,7 +1,5 @@
-import { useState } from "react"
-
 export function Arquivados(props) {
-  const [arquivadas, setArquivadas] = useState([{}])
+  // const [arquivadas, setArquivadas] = useState([{}])
   // let teste = {
   //   data: props.location.tarefaArquivadas
   // }
@@ -15,7 +13,7 @@ export function Arquivados(props) {
 
   // const { data } = response.data
 
-  console.log(response)
+  console.log(response) // Imprime todos as informações do componente FormTarefa (estádo arquivados)
 
   return (
     <>
