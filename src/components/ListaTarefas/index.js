@@ -2,10 +2,6 @@ import { Container } from "./styles";
 import { FiX } from 'react-icons/fi'
 
 export function ListaTarefas({ nomeTarefa }) {
-  function handleDeleteTarefa(nome) {
-
-  }
-
   return (
     <Container>
       <ul>

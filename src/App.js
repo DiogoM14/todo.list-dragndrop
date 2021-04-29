@@ -1,10 +1,11 @@
 import { FormTarefa } from "./components/FormTarefa";
+import { Routes } from "./routes";
 import {GlobalStyles} from './styles/global'
 
 function App() {
   return (
     <>
-      <FormTarefa />
+      <Routes />
       <GlobalStyles />
     </>
   );

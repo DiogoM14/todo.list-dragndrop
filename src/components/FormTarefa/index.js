@@ -1,21 +1,40 @@
 import { useState } from "react";
-import { ListaTarefas } from "../ListaTarefas";
-import { Container, Form } from "./styles";
+import { FiX } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { Container, Form, Card } from "./styles";
+import { v4 as uuidv4, v4 } from 'uuid';
+import { Arquivados } from "../Arquivados";
 
 export function FormTarefa() {
-  const [tarefas, setTarefas] = useState([]);
+  const [tarefas, setTarefas] = useState([{}]);
+  const [arquivadas, setArquivadas] = useState([{}]);
   const [value, setValue] = useState([]);
+
+  // const { addArquivada } = useArquivadas
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    setTarefas([...tarefas, value]);
-    console.log(tarefas);
+    const novaTarefa = {
+      id: v4(),
+      nome: value
+    }
+
+    setTarefas([...tarefas, novaTarefa]);
+    // console.log(tarefas);
   }
 
-  function handleDeleteTarefa(nome) {
-    setTarefas(tarefas.filter(tarefa => tarefa !== nome))
-    console.log("delete")
+  function handleDeleteTarefa(id) {
+
+    let novaArquivada = {
+      data: tarefas.filter(tarefa => tarefa.id === id)
+    }
+
+    setArquivadas([...arquivadas, novaArquivada.data])
+    // addArquivada(novaArquivada)
+    // console.log(arquivadas)
+
+    setTarefas(tarefas.filter(tarefa => tarefa.id !== id))
   }
 
   return (
@@ -26,23 +45,28 @@ export function FormTarefa() {
         placeholder="Insira a tarefa"
           type="text"
           value={value}
-          onChange={(event) => setValue(event.target.value)}
-        />
+          onChange={(event) => setValue(event.target.value)} />
         <button type="submit">Adicionar</button>
       </Form>
+
       {tarefas.map(tarefa => (
-        <ListaTarefas nomeTarefa={tarefa} />
+        <Card key={tarefa.id}>
+          <ul>
+            <li>{tarefa.nome}</li>
+            <FiX size={20} cursor="pointer" onClick={() => handleDeleteTarefa(tarefa.id)}  />
+          </ul>
+        </Card>
       ))}
 
-      {/* {tarefas.map(tarefa => (
-          <ul>
-            <li>{tarefa}</li>
-            <FiX size={20} cursor="pointer" onClick={handleDeleteTarefa} />
-          </ul>
-      ))} */}
-
       <hr/>
-      <a href="">Ver tarefas arquivadas</a>
+      <Link to={{
+        pathname: "/arquivados",
+        tarefaArquivadas: arquivadas
+        }}>
+        Ver tarefas arquivadas
+      </Link>
+
+      <Arquivados arquivadas={arquivadas} />
     </Container>
   )
 }
